@@ -13,14 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    var toggle_btn = document.getElementsByClassName('toggle-css')[0];
-    if (toggle_btn) {
-        toggle_btn.onclick = function () {
-            chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, { message: "toggle_css" });
-            });
-        }
-    }
 
     var linkElement = document.getElementsByClassName("link")[0];
     if (linkElement) {
@@ -85,12 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function extractTextAndSendData(imageData, description) {
-        // Extract text from the image using Tesseract.js or other library
-        // Example:
-        // const text = extractTextFromImage(imageData);
-        // Then send the text along with other data to the Flask backend
-
-        // For now, send the imageData directly without text extraction
         sendData(imageData, description);
     }
 
@@ -118,11 +104,4 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementsByClassName('close')[0].addEventListener('click', function () {
         document.getElementById('cropperModal').style.display = 'none';
     });
-
-    window.onclick = function (event) {
-        const modal = document.getElementById('cropperModal');
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    };
 });
