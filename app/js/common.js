@@ -336,37 +336,7 @@ const isShown = (element) => {
     return !hiddenByOverflow(element);
 };
 
-const isInteractable = (element) => {
-    const isEnabled = (element) => {
-        const disabledSupportElements = ['button', 'input', 'optgroup', 'option', 'select', 'textarea'];
-        const tagName = element.tagName.toLowerCase();
 
-        if (!disabledSupportElements.includes(tagName)) {
-            return true;
-        }
-
-        if (element.getAttribute('disabled')) {
-            return false;
-        }
-
-        if (element.parentElement && (tagName === 'optgroup' || tagName === 'option')) {
-            return isEnabled(element.parentElement);
-        }
-
-        return true;
-    };
-
-    const arePointerEventsDisabled = (element) => {
-        const style = window.getComputedStyle(element);
-        if (!style) {
-            return false;
-        }
-
-        return style.pointerEvents === 'none';
-    };
-
-    return isShown(element) && isEnabled(element) && !arePointerEventsDisabled(element);
-};
 
 const containsTextNodes = (element) => {
     if (element) {
@@ -402,22 +372,6 @@ const isPixel = (element) => {
     return (height === 1 && width === 1);
 };
 
-const containsBlockElements = (element, visibility = true) => {
-    for (const be of blockElements) {
-        const children = Array.from(element.getElementsByTagName(be));
-        if (visibility) {
-            for (const child of children) {
-                if (isShown(child)) {
-                    return true;
-                }
-            }
-        } else {
-            return children.length > 0 ? true : false;
-        }
-    }
-
-    return false;
-};
 
 const isWhitespace = (element) => {
     return (element.nodeType === element.TEXT_NODE &&
