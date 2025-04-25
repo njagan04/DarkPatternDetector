@@ -54,27 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const cropperContainer = document.getElementById('cropperContainer');
 
         const img = new Image();
-        img.onload = function () {
-            cropperContainer.appendChild(img);
-            modal.style.display = 'block';
-
-            const cropper = new Cropper(img, {
-                aspectRatio: NaN,
-                viewMode: 1,
-                zoomable: false,
-            });
-
-            document.getElementById('cropButton').addEventListener('click', function () {
-                const canvas = cropper.getCroppedCanvas();
-                const croppedDataUrl = canvas.toDataURL('image/png');
-
-                modal.style.display = 'none';
-                extractTextAndSendData(croppedDataUrl, description);
-            });
-        };
-
-        img.src = imageUrl;
-    }
 
     function extractTextAndSendData(imageData, description) {
         sendData(imageData, description);

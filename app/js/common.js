@@ -338,28 +338,6 @@ const isShown = (element) => {
 
 
 
-const containsTextNodes = (element) => {
-    if (element) {
-        if (element.hasChildNodes()) {
-            const nodes = [];
-            for (const cnode of element.childNodes) {
-                if (cnode.nodeType === Node.TEXT_NODE) {
-                    const text = filterText(cnode.nodeValue);
-                    if (text.length !== 0) {
-                        nodes.push(text);
-                    }
-                }
-            }
-
-            return (nodes.length > 0 ? true : false);
-        } else {
-            return false;
-        }
-    } else {
-        return false;
-    }
-};
-
 const filterText = (text) => {
     return text.replace(/(\r\n|\n|\r)/gm, '').trim();
 };
