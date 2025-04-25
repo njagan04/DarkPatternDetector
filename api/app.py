@@ -7,6 +7,8 @@ import base64
 import openpyxl
 from openpyxl.drawing.image import Image
 from io import BytesIO
+from zipfile import ZipFile
+import json
 import numpy as np
 
 presence_classifier = load('presence_classifer.joblib')
@@ -77,6 +79,9 @@ def report():
         workbook.save('reports.xlsx')
 
         return jsonify({'message': 'Report saved successfully.'})
+
+
+
 
 
 if __name__ == '__main__':
